@@ -17,9 +17,10 @@ class LocalNotification {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static initializeLocalNotification(
-      {void onNotificationPressed(Map<String, dynamic> data)?,
-      required String icon}) async {
+  static initializeLocalNotification({
+    void onNotificationPressed(Map<String, dynamic> data)?,
+    required String icon,
+  }) async {
     // Create an Android notification Channel.
     ///
     /// We use this channel in the `AndroidManifest.xml` file to override the
@@ -51,7 +52,7 @@ class LocalNotification {
 
   static Future onDidReceiveLocalNotification(
       int id, String? title, String? body, String? payload) async {
-    print(title);
+    debugPrint(title);
   }
 
   static void onDidReceiveNotificationResponse(
@@ -77,7 +78,6 @@ class LocalNotification {
             channel.id,
             channel.name,
             // channel.description,
-            // TODO add a proper drawable resource to android, for now using
             //      one that already exists in example app.
             icon: icon,
           ),
