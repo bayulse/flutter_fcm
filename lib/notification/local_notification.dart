@@ -65,23 +65,25 @@ class LocalNotification {
     }
   }
 
-  static showNotification(
-      {required RemoteNotification notification,
-      Map<String, dynamic>? payload,
-      String? icon}) {
-    flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            // channel.description,
-            //      one that already exists in example app.
-            icon: icon,
-          ),
+  static showNotification({
+    required RemoteNotification notification,
+    Map<String, dynamic>? payload,
+    String? icon,
+  }) async {
+    await flutterLocalNotificationsPlugin.show(
+      notification.hashCode,
+      notification.title,
+      notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id, channel.name,
+          // channel.description,
+          //      one that already exists in example app.
+          icon: icon,
+          styleInformation: BigTextStyleInformation(''),
         ),
-        payload: jsonEncode(payload));
+      ),
+      payload: jsonEncode(payload),
+    );
   }
 }
